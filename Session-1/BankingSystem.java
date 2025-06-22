@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 class BankAccount {
@@ -7,10 +11,10 @@ class BankAccount {
     double balance;
     String accountType;
 
-    public BankAccount(String accountHolder, int accountNumber, double balance, String accountType) {
+    public BankAccount(String accountHolder, int accountNumber, double initialBalance, String accountType) {
         this.accountHolder = accountHolder;
         this.accountNumber = accountNumber;
-        this.balance = balance;
+        this.balance = initialBalance;
         this.accountType = accountType;
     }
 
@@ -33,8 +37,7 @@ class BankAccount {
     }
 
     // Check balance
-    public double checkBalance(int amount) {
-        this.balance = balance + amount; // This is not updating the balance, just returning it
+    public double checkBalance() {
         return balance;
     }
 
@@ -46,6 +49,25 @@ class BankAccount {
         System.out.println("Account Type: " + accountType);
     }
 
+    // Map to store account numbers of users
+    private static Map<String, List<Integer>> accountNumbers = new HashMap<>();
+
+    // Check if account number is unique
+    public static boolean isAccountNumberUnique(String accountHolder, int accountNumber) {
+        if (accountNumbers.containsKey(accountHolder)) {
+            if (accountNumbers.get(accountHolder).contains(accountNumber)) {
+                return false;
+            } else {
+                accountNumbers.get(accountHolder).add(accountNumber);
+                return true;
+            }
+        } else {
+            List<Integer> list = new ArrayList<>();
+            list.add(accountNumber);
+            accountNumbers.put(accountHolder, list);
+            return true;
+        }
+    }
 }
 
 public class BankingSystem {
@@ -58,51 +80,54 @@ public class BankingSystem {
         String accountHolder = scanner.nextLine(); // Take Input as String
         System.out.print("Enter account number: ");
         int accountNumber = scanner.nextInt(); // Take Input as Integer
-
-        // System.out.print("Enter initial balance: ");
-        // double initialBalance = scanner.nextDouble(); // Take Input as Double
         scanner.nextLine(); // Consume the newline character
-        System.out.print("Enter account type (Savings/Current): ");
-        String accountType = scanner.nextLine(); // Take Input as String
 
-        // Create a new BankAccount object
-        BankAccount account = new BankAccount(accountHolder, accountNumber, initialBalance, accountType);
+        // Check if account number is unique
+        if (BankAccount.isAccountNumberUnique(accountHolder, accountNumber)) {
+            System.out.print("Enter initial balance: ");
+            double initialBalance = scanner.nextDouble(); // Take Input as Double
+            scanner.nextLine(); // Consume the newline character
+            System.out.print("Enter account type (Savings/Current): ");
+            String accountType = scanner.nextLine(); // Take Input as String
 
-        // Display Menu
-        
-        // TODO: Add case for this and make a PR on my branch with your name
-        // TODO: Bydefault the initial balance should be 0.0
-        // TODO: the balance should be updated balkance only after depositing or withdrawing money
-        // TODO: if Arpit have a bank account number = 1234567890 then it has to be unique one.
+            // Create a new BankAccount object
+            BankAccount account = new BankAccount(accountHolder, accountNumber, initialBalance, accountType);
 
-        // If-Else Menu
-        System.out.println("Choose an option:");
-        System.out.println("1. Deposit");
-        System.out.println("2. Withdraw");
-        System.out.println("3. Check Balance");
-        System.out.println("4. Account History");
-        System.out.println("5. Exit");
-        int choice = scanner.nextInt();
-        if(choice == 1) {
-            System.out.print("Enter amount to deposit: ");
-            double depositAmount = scanner.nextDouble();
-            account.deposit(depositAmount);
-        } else if (choice == 2) {
-            System.out.print("Enter amount to withdraw: ");
-            double withdrawAmount = scanner.nextDouble();
-            account.withdraw(withdrawAmount);
-        } else if (choice == 3) {
-            System.out.println("Current Balance: " + account.checkBalance());
-        } else if (choice == 4) {
-            account.AccountHistory();
-        } else if (choice == 5) {
-            System.out.println("Exiting the Banking System. Thank you!");
+            // Display Menu
+            while (true) {
+                System.out.println("Choose an option:");
+                System.out.println("1. Deposit");
+                System.out.println("2. Withdraw");
+                System.out.println("3. Check Balance");
+                System.out.println("4. Account History");
+                System.out.println("5. Exit");
+                int choice = scanner.nextInt();
+                if (choice == 1) {
+                    System.out.print("Enter amount to deposit: ");
+                    double depositAmount = scanner.nextDouble();
+                    account.deposit(depositAmount);
+                } else if (choice == 2) {
+                    System.out.print("Enter amount to withdraw: ");
+                    double withdrawAmount = scanner.nextDouble();
+                    account.withdraw(withdrawAmount);
+                } else if (choice == 3) {
+                    System.out.println("Current Balance: " + account.checkBalance());
+                } else if (choice == 4) {
+                    account.AccountHistory();
+                } else if (choice == 5) {
+                    System.out.println("Exiting the Banking System. Thank you!");
+                    break;
+                } else {
+                    System.out.println("Invalid choice. Please try again.");
+                }
+            }
         } else {
-            System.out.println("Invalid choice. Please try again.");
+            System.out.println("Account number already exists. Please try again.");
         }
 
         // Close the scanner
         scanner.close();
+
         // End of the program
         System.out.println("Thank you for using the Banking System!");
         // End of the program

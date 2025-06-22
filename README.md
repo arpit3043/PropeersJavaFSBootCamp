@@ -24,3 +24,22 @@ Welcome to the **Java Learning Bootcamp** repository! This repo contains code an
 **Assignment:**  
 - Add transactions like deposit, withdrawal, and balance inquiry  
 - Implement basic input validation
+---
+
+### 📗 Session 2: Java Collections & Exception Handling
+
+**Topics Covered:**
+- Collections Framework: List, Set, Map, Queue
+- Data Structure Selection Based on Use Case
+- Exception Handling:
+  - try-catch-finally
+  - throw and throws
+  - Creating Custom Exceptions
+
+**Project:** Student Record Manager using ArrayList & HashMap  
+**Assignment:**  
+- Add sorting by name or marks  
+- Implement search functionality  
+- Handle input errors using exception handlingf
+
+---
