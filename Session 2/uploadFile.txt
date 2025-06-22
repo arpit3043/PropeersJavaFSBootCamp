@@ -1,0 +1,10 @@
+Make a new Branch from the code branch
+Step 1: Git clone "https://github.com/arpit3043/PropeersJavaFSBootCamp.git"
+
+Step 2: git checkout -b "santrup_branch" // You will be on your branch now,
+whatever changes you will do will be kept on your branch and not impact my code
+
+Step 3: you make your changes in code whatever you want to make in code
+
+Step 4: git push origin santrup_branch // Basically your branch name after origin.
+
