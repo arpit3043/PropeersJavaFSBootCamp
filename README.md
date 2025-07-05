@@ -43,3 +43,21 @@ Welcome to the **Java Learning Bootcamp** repository! This repo contains code an
 - Handle input errors using exception handlingf
 
 ---
+
+### 📙 Session 3: File Handling, JDBC & SQL Integration
+
+**Topics Covered:**
+- File I/O in Java:
+  - FileReader, FileWriter
+  - BufferedReader, BufferedWriter
+- Database Connectivity with JDBC:
+  - MySQL Integration
+  - Performing CRUD operations
+  - SQL Query Execution
+
+**Project:** Library Management System using MySQL  
+**Assignment:**
+- Add book search and borrow/return functionality
+- Store user information in the database
+
+---
